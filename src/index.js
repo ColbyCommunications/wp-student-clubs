@@ -22,7 +22,7 @@ function init() {
 
     render(
       <Provider store={store}>
-        <ColbyStudentClubs />
+        <ColbyStudentClubs pageOne={container.innerHTML} />
       </Provider>,
       container
     );

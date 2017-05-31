@@ -1,3 +1,5 @@
+import debounce from 'lodash/debounce';
+
 const REST_BASE = 'http://www.colby.edu/studentactivities/wp-json/wp/v2/';
 
 export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES';
@@ -63,5 +65,42 @@ export function fetchPage(id) {
       fetchPageCache[url] = posts;
       dispatch(receivePage(posts));
     });
+  };
+}
+
+export const CHANGE_SEARCH_TERM = 'CHANGE_SEARCH_TERM';
+export function changeSearchTerm(searchTerm) {
+  return {
+    type: CHANGE_SEARCH_TERM,
+    searchTerm,
+  };
+}
+
+export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS';
+export function receiveSearchResults(posts) {
+  return {
+    type: RECEIVE_SEARCH_RESULTS,
+    posts,
+  };
+}
+
+const searchCache = {};
+const search = (dispatch, url) =>
+  fetch(url).then((response) => response.json()).then((posts) => {
+    searchCache[url] = posts;
+    dispatch(receiveSearchResults(posts));
+  });
+const debouncedSearch = debounce(search, 200);
+export function runSearch(searchTerm) {
+  return (dispatch) => {
+    dispatch(changeSearchTerm(searchTerm));
+
+    const url = `${REST_BASE}student-organization?search=${searchTerm}`;
+
+    if (url in searchCache) {
+      return dispatch(receiveSearchResults(searchCache[url]));
+    }
+
+    return debouncedSearch(dispatch, url);
   };
 }
