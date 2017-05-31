@@ -1,6 +1,6 @@
 {
   "name": "colby-student-clubs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React/Redux/WordPress REST API app for displaying Colby student clubs.",
   "main": "src/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
   },
-	"eslintConfig": {
+  "eslintConfig": {
     "extends": [
       "./node_modules/colby-code-standards/.eslintrc.js"
     ]
