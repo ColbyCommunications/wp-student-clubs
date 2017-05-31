@@ -11,12 +11,13 @@ import ColbyStudentClubs from './components/colby-student-clubs';
 
 function init() {
   document.querySelectorAll('[data-student-clubs]').forEach((container) => {
-    const loggerMiddleware = createLogger();
+    const middlewares = [thunkMiddleware];
 
-    const store = createStore(
-      rootReducer,
-      applyMiddleware(thunkMiddleware, loggerMiddleware)
-    );
+    if (window.location.href.indexOf('localhost') !== -1) {
+      middlewares.push(createLogger());
+    }
+
+    const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
     store.dispatch(fetchCategories());
 
