@@ -28,7 +28,7 @@ function categories(
       });
     case SET_ACTIVE_CATEGORY:
       return Object.assign({}, state, {
-        activeCategory: action.category,
+        activeCategory: action.id,
       });
     default:
       return state;

@@ -1,4 +1,4 @@
-const REST_BASE = 'www.colby.edu/studentactivities/wp-json/wp/v2/';
+const REST_BASE = 'http://www.colby.edu/studentactivities/wp-json/wp/v2/';
 
 export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES';
 export function requestCategories() {
@@ -18,10 +18,17 @@ export function receiveCategories(categories) {
 export function fetchCategories() {
   return (dispatch) => {
     dispatch(requestCategories());
-
-    return fetch(`${REST_BASE}categories`)
+    return fetch(`${REST_BASE}categories?per_page=99&exclude=1&hide_empty=true`)
       .then((response) => response.json())
       .then((categories) => dispatch(receiveCategories(categories)));
+  };
+}
+
+export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
+export function setActiveCategory(id) {
+  return {
+    type: SET_ACTIVE_CATEGORY,
+    id,
   };
 }
 
@@ -44,6 +51,7 @@ const fetchPageCache = {};
 export function fetchPage(id) {
   return (dispatch) => {
     dispatch(requestPage());
+    dispatch(setActiveCategory(id));
 
     const url = `${REST_BASE}student-organization?categories=${id}`;
 
