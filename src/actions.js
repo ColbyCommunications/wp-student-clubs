@@ -2,30 +2,6 @@ import debounce from 'lodash/debounce';
 
 const REST_BASE = 'http://www.colby.edu/studentactivities/wp-json/wp/v2/';
 
-export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES';
-export function requestCategories() {
-  return {
-    type: REQUEST_CATEGORIES,
-  };
-}
-
-export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
-export function receiveCategories(categories) {
-  return {
-    type: RECEIVE_CATEGORIES,
-    categories,
-  };
-}
-
-export function fetchCategories() {
-  return (dispatch) => {
-    dispatch(requestCategories());
-    return fetch(`${REST_BASE}categories?per_page=99&exclude=1&hide_empty=true`)
-      .then((response) => response.json())
-      .then((categories) => dispatch(receiveCategories(categories)));
-  };
-}
-
 export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
 export function setActiveCategory(id) {
   return {

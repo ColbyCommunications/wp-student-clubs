@@ -2,20 +2,23 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import styles from 'colby-scss/modules/colby-student-clubs.scss';
 
-const CategoryButton = ({ active, id, name, onClick }) => (
-  <button
-    className={[
-      styles.category,
-      active === true ? styles['category--active'] : '',
-    ]
-      .join(' ')
-      .trim()}
-    dangerouslySetInnerHTML={{ __html: name }}
-    onClick={() => onClick(id)}
-  />
+const CategoryButton = ({ active, id, name, onClick, slug }) => (
+  <Link to={`/${slug}`}>
+    <button
+      onClick={() => onClick(id)}
+      className={[
+        styles.category,
+        active === true ? styles['category--active'] : '',
+      ]
+        .join(' ')
+        .trim()}
+      dangerouslySetInnerHTML={{ __html: name }}
+    />
+  </Link>
 );
 
 CategoryButton.propTypes = {
@@ -23,6 +26,7 @@ CategoryButton.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default CategoryButton;

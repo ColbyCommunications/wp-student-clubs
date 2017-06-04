@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import AnimatedEllipsis from 'colby-react-animated-ellipsis';
-
 import styles from 'colby-scss/modules/colby-student-clubs.scss';
-
 import Post from './post';
 
-function drawPost(post) {
+const drawPost = ({ meta, id, title, content }) => {
   const metaProps = {};
 
-  if (post.meta) {
+  if (meta) {
     [
       'office_phone',
       'faculty_advisor',
@@ -19,25 +16,28 @@ function drawPost(post) {
       'student_advisor_email',
       'website',
     ].forEach((key) => {
-      if (
-        post.meta[key] &&
-        post.meta[key][0] &&
-        post.meta[key][0].trim().length > 0
-      ) {
-        metaProps[key] = post.meta[key][0].trim();
+      if (meta[key] && meta[key][0] && meta[key][0].trim().length > 0) {
+        metaProps[key] = meta[key][0].trim();
       }
     });
   }
 
   return (
     <Post
-      key={post.id}
-      title={post.title.rendered}
-      description={post.content.rendered}
+      key={id}
+      title={title.rendered}
+      description={content.rendered}
       {...metaProps}
     />
   );
-}
+};
+
+drawPost.propTypes = {
+  content: PropTypes.objectOf(PropTypes.string).isRequired,
+  id: PropTypes.number.isRequired,
+  meta: PropTypes.arrayOf(PropTypes.object).isRequired,
+  title: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 const Page = ({ posts, fetching, pageOne, searchTerm, activeCategory }) => {
   if (fetching === true) {
@@ -76,6 +76,7 @@ const Page = ({ posts, fetching, pageOne, searchTerm, activeCategory }) => {
 
 Page.defaultProps = {
   activeCategory: null,
+  pageOne: 'Page One',
   posts: [],
   searchTerm: '',
 };
@@ -83,7 +84,7 @@ Page.defaultProps = {
 Page.propTypes = {
   activeCategory: PropTypes.number,
   fetching: PropTypes.bool.isRequired,
-  pageOne: PropTypes.string.isRequired,
+  pageOne: PropTypes.string,
   posts: PropTypes.arrayOf(PropTypes.object),
   searchTerm: PropTypes.string,
 };

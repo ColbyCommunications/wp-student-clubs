@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 
 import {
-  REQUEST_CATEGORIES,
-  RECEIVE_CATEGORIES,
   SET_ACTIVE_CATEGORY,
   REQUEST_PAGE,
   RECEIVE_PAGE,
@@ -29,13 +27,6 @@ function categories(
         savedActiveCategory: state.activeCategory === null
           ? state.savedActiveCategory
           : state.activeCategory,
-      });
-    case REQUEST_CATEGORIES:
-      return Object.assign({}, state, { fetching: true, categories: [] });
-    case RECEIVE_CATEGORIES:
-      return Object.assign({}, state, {
-        fetching: false,
-        categories: action.categories,
       });
     case SET_ACTIVE_CATEGORY:
       return Object.assign({}, state, {

@@ -10,6 +10,8 @@ const mapDispatchToProps = (dispatch) => ({
   onClick: (id) => dispatch(fetchPage(id)),
 });
 
-const Category = connect(mapStateToProps, mapDispatchToProps)(CategoryButton);
+const CategoryButtonContainer = connect(mapStateToProps, mapDispatchToProps)(
+  CategoryButton
+);
 
-export default Category;
+export default CategoryButtonContainer;

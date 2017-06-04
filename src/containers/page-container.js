@@ -9,6 +9,6 @@ const mapStateToProps = (state, ownProps) => ({
   activeCategory: state.categories.activeCategory,
 });
 
-const CurrentPage = connect(mapStateToProps)(Page);
+const PageContainer = connect(mapStateToProps)(Page);
 
-export default CurrentPage;
+export default PageContainer;
