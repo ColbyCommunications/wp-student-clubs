@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import sanitizeHtml from 'sanitize-html';
 import AnimatedEllipsis from 'colby-react-animated-ellipsis';
 import styles from 'colby-scss/modules/colby-student-clubs.scss';
-import Post from './post';
+import Club from './club';
 
 const drawPost = ({ meta, id, title, content }) => {
   const metaProps = {};
@@ -22,20 +23,11 @@ const drawPost = ({ meta, id, title, content }) => {
     });
   }
 
-  /* Strip HTML from title and description. */
-  const div = document.createElement('div');
-
-  div.innerHTML = content.rendered;
-  const description = div.innerText;
-
-  div.innerHTML = title.rendered;
-  const titleRendered = div.innerText;
-
   return (
-    <Post
+    <Club
       key={id}
-      title={titleRendered}
-      description={description}
+      title={sanitizeHtml(title.rendered, { allowedTags: [] })}
+      description={sanitizeHtml(content.rendered, { allowedTags: [] })}
       {...metaProps}
     />
   );

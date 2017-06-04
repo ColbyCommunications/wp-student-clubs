@@ -12,6 +12,11 @@ import AppContainer from './containers/app-container';
 
 const REST_BASE = 'http://www.colby.edu/studentactivities/wp-json/wp/v2/';
 
+let basename = '/communitylife/student-organizations';
+if (window.location.href.indexOf('localhost') !== -1) {
+  basename = `/wp${basename}`;
+}
+
 function renderClubs(container, categories) {
   const initialState = {
     categories: { categories },
@@ -41,7 +46,7 @@ function renderClubs(container, categories) {
 
   render(
     <Provider store={store}>
-      <BrowserRouter basename="/wp/communitylife/student-organizations">
+      <BrowserRouter basename={basename}>
         <Route component={AppContainer} />
       </BrowserRouter>
     </Provider>,
