@@ -1,40 +1,34 @@
-/* eslint react/no-danger: 0 */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from 'colby-scss/modules/colby-student-clubs.scss';
 
-function drawMeta(clubProps) {
-  const phone = clubProps.phone
-    ? [<dt>Phone</dt>, <dd>{clubProps.phone}</dd>]
-    : [];
+const drawMeta = ({
+  phone,
+  facultyAdvisor,
+  facultyAdvisorEmail,
+  studentAdvisor,
+  studentAdvisorEmail,
+}) => {
+  const phoneRendered = phone ? [<dt>Phone</dt>, <dd>{phone}</dd>] : [];
 
-  const facultyAdvisor = clubProps.faculty_advisor &&
-    clubProps.faculty_advisor_email
+  const facultyAdvisorRendered = facultyAdvisor && facultyAdvisorEmail
     ? [
-      <dt key={`${clubProps.faculty_advisor_email}-dt`}>Faculty Advisor</dt>,
-      <dd key={`${clubProps.faculty_advisor_email}-dd`}>
-        <a href={`mailto:${clubProps.faculty_advisor_email}`}>
-          {clubProps.faculty_advisor
-              .split(',')
-              .map((item) => item.trim())
-              .join(', ')}
+      <dt key={`${facultyAdvisorEmail}-dt`}>Faculty Advisor</dt>,
+      <dd key={`${facultyAdvisorEmail}-dd`}>
+        <a href={`mailto:${facultyAdvisorEmail}`}>
+          {facultyAdvisor.split(',').map((item) => item.trim()).join(', ')}
         </a>
       </dd>,
     ]
     : [];
 
-  const studentAdvisor = clubProps.student_advisor &&
-    clubProps.student_advisor_email
+  const studentAdvisorRendered = studentAdvisor && studentAdvisorEmail
     ? [
-      <dt key={`${clubProps.student_advisor_email}-dt`}>Student Advisor</dt>,
-      <dd key={`${clubProps.student_advisor_email}-dd`}>
-        <a href={`mailto:${clubProps.student_advisor_email}`}>
-          {clubProps.student_advisor
-              .split(',')
-              .map((item) => item.trim())
-              .join(', ')}
+      <dt key={`${studentAdvisorEmail}-dt`}>Student Advisor</dt>,
+      <dd key={`${studentAdvisorEmail}-dd`}>
+        <a href={`mailto:${studentAdvisorEmail}`}>
+          {studentAdvisor.split(',').map((item) => item.trim()).join(', ')}
         </a>
       </dd>,
     ]
@@ -42,37 +36,67 @@ function drawMeta(clubProps) {
 
   return (
     <dl className={styles.meta}>
-      {phone.concat(facultyAdvisor).concat(studentAdvisor)}
+      {phoneRendered
+        .concat(facultyAdvisorRendered)
+        .concat(studentAdvisorRendered)}
     </dl>
   );
-}
+};
 
-export default function Club(props) {
-  const drawTitle = ({ title, website }) => {
-    const h1 = (
-      <h1
-        className={styles['club-name']}
-        dangerouslySetInnerHTML={{ __html: title }}
-      />
-    );
+drawMeta.defaultProps = {
+  facultyAdvisor: null,
+  facultyAdvisorEmail: null,
+  phone: null,
+  studentAdvisor: null,
+  studentAdvisorEmail: null,
+};
 
-    return website ? <a href={website}>{h1}</a> : h1;
-  };
+drawMeta.propTypes = {
+  facultyAdvisor: PropTypes.string,
+  facultyAdvisorEmail: PropTypes.string,
+  phone: PropTypes.string,
+  studentAdvisor: PropTypes.string,
+  studentAdvisorEmail: PropTypes.string,
+};
 
-  const description = props.description
-    ? <p dangerouslySetInnerHTML={{ __html: props.description }} />
-    : null;
+const drawTitle = ({ title, website }) => {
+  const h1 = <h1 className={styles['club-name']}>{title}</h1>;
+
+  return website ? <a href={website}>{h1}</a> : h1;
+};
+
+drawTitle.defaultProps = {
+  title: '',
+  website: null,
+};
+
+drawTitle.propTypes = {
+  title: PropTypes.string,
+  website: PropTypes.string,
+};
+
+export default function Club({
+  description,
+  title,
+  office_phone,
+  faculty_advisor,
+  faculty_advisor_email,
+  student_advisor,
+  student_advisor_email,
+  website,
+}) {
+  const descriptionP = description ? <p>{description}</p> : null;
 
   return (
     <div className={styles.club}>
-      {drawTitle({ website: props.website, title: props.title })}
-      {description}
+      {drawTitle({ website, title })}
+      {descriptionP}
       {drawMeta({
-        office_phone: props.office_phone,
-        faculty_advisor: props.faculty_advisor,
-        faculty_advisor_email: props.faculty_advisor_email,
-        student_advisor: props.student_advisor,
-        student_advisor_email: props.student_advisor_email,
+        officePhone: office_phone,
+        facultyAdvisor: faculty_advisor,
+        facultyAdvisorEmail: faculty_advisor_email,
+        studentAdvisor: student_advisor,
+        studentAdvisorEmail: student_advisor_email,
       })}
     </div>
   );

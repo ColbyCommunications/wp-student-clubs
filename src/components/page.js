@@ -22,11 +22,20 @@ const drawPost = ({ meta, id, title, content }) => {
     });
   }
 
+  /* Strip HTML from title and description. */
+  const div = document.createElement('div');
+
+  div.innerHTML = content.rendered;
+  const description = div.innerText;
+
+  div.innerHTML = title.rendered;
+  const titleRendered = div.innerText;
+
   return (
     <Post
       key={id}
-      title={title.rendered}
-      description={content.rendered}
+      title={titleRendered}
+      description={description}
       {...metaProps}
     />
   );
