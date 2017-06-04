@@ -9,7 +9,7 @@ import styles from 'colby-scss/modules/colby-student-clubs.scss';
 const CategoryButton = ({ active, id, name, onClick, slug }) => (
   <Link to={`/${slug}`}>
     <button
-      onClick={() => onClick(id)}
+      onClick={() => onClick(active === true ? null : id)}
       className={[
         styles.category,
         active === true ? styles['category--active'] : '',

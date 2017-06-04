@@ -48,7 +48,7 @@ const Page = ({ posts, fetching, pageOne, searchTerm, activeCategory }) => {
     );
   }
 
-  if (fetching === false && posts.length === 0) {
+  if (fetching === false && (!posts || posts.length === 0)) {
     if (searchTerm === '') {
       return (
         <div

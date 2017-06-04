@@ -25,19 +25,33 @@ export function receivePage(posts) {
   };
 }
 
+export const RESET_PAGE = 'RESET_PAGE';
+export function resetPage() {
+  return {
+    type: RESET_PAGE,
+  };
+}
+
 const fetchPageCache = {};
 export function fetchPage(id) {
   return (dispatch) => {
+    if (id === null) {
+      dispatch(setActiveCategory(null));
+      dispatch(resetPage());
+      return;
+    }
+
     dispatch(requestPage());
     dispatch(setActiveCategory(id));
 
     const url = `${REST_BASE}student-organization?categories=${id}`;
 
     if (url in fetchPageCache) {
-      return dispatch(receivePage(fetchPageCache[url]));
+      dispatch(receivePage(fetchPageCache[url]));
+      return;
     }
 
-    return fetch(url).then((response) => response.json()).then((posts) => {
+    fetch(url).then((response) => response.json()).then((posts) => {
       fetchPageCache[url] = posts;
       dispatch(receivePage(posts));
     });

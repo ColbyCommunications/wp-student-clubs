@@ -4,6 +4,7 @@ import {
   SET_ACTIVE_CATEGORY,
   REQUEST_PAGE,
   RECEIVE_PAGE,
+  RESET_PAGE,
   CHANGE_SEARCH_TERM,
   RECEIVE_SEARCH_RESULTS,
 } from './actions';
@@ -46,6 +47,8 @@ function page(
   action
 ) {
   switch (action.type) {
+    case RESET_PAGE:
+      return Object.assign({}, state, { posts: [] });
     case REQUEST_PAGE:
       return Object.assign({}, state, { fetching: true });
     case RECEIVE_PAGE:
