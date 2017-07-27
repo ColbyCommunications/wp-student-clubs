@@ -1,0 +1,83 @@
+@import '~bootstrap/scss/functions',
+  '~colby-scss/variables',
+  '~bootstrap/scss/variables',
+  '~bootstrap/scss/mixins';
+
+.container {
+  display: flex;
+
+  @include make-row;
+}
+
+.category-pane {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+
+  @include make-col-ready;
+
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    @include make-col(3);
+  }
+}
+
+.categories-title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.page-pane {
+  padding-top: 1.5rem;
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    @include make-col(9);
+  }
+}
+
+.page--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 4rem;
+}
+
+.category {
+  flex-wrap: wrap;
+  margin-bottom: .125rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  width: 100%;
+  background-color: rgba($blue, .8);
+  text-transform: uppercase;
+  white-space: normal;
+  font-size: .891rem;
+  cursor: pointer;
+  color: white;
+  border: none;
+}
+
+.category--active {
+  background-color: $blue;
+}
+
+.club-name {
+  font-weight: 600;
+  font-size: 1.19rem;
+}
+
+.club {
+  padding: 1.5rem;
+  background: rgba($black, .045);
+
+  &:nth-of-type(odd) {
+    background: rgba($black, .075);
+  }
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 4rem;
+}

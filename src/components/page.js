@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import sanitizeHtml from 'sanitize-html';
 import AnimatedEllipsis from 'colby-react-animated-ellipsis';
-import styles from 'colby-scss/modules/colby-student-clubs.scss';
+import styles from './colby-student-clubs.module.scss';
 import Club from './club';
 
 const drawPost = ({ meta, id, title, content }) => {

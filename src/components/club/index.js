@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from 'colby-scss/modules/colby-student-clubs.scss';
+import styles from '../colby-student-clubs.module.scss';
 
 import ClubMeta from './meta';
 import ClubTitle from './club-title';
@@ -16,8 +16,8 @@ const Club = ({
   student_advisor,
   student_advisor_email,
   website,
-}) => (
-  <div className={styles.club}>
+}) =>
+  (<div className={styles.club}>
     <ClubTitle website={website} title={title} />
     <ClubDescription description={description} />
     <ClubMeta
@@ -29,8 +29,7 @@ const Club = ({
       studentAdvisorEmail={student_advisor_email}
       /* eslint-enable camelcase */
     />
-  </div>
-);
+  </div>);
 
 Club.defaultProps = {
   description: null,

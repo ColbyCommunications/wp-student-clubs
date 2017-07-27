@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-import styles from 'colby-scss/modules/colby-student-clubs.scss';
+import styles from './colby-student-clubs.module.scss';
 
 import CategoriesContainer from '../containers/categories-container';
 import PageContainer from '../containers/page-container';

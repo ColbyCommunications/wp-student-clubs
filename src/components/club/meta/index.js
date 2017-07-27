@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from 'colby-scss/modules/colby-student-clubs.scss';
+import styles from '../../colby-student-clubs.module.scss';
 
 import Advisor from './advisor';
 import AdvisorPhone from './advisor-phone';
@@ -12,8 +12,8 @@ const Meta = ({
   facultyAdvisorEmail,
   studentAdvisor,
   studentAdvisorEmail,
-}) => (
-  <dl className={styles.meta}>
+}) =>
+  (<dl className={styles.meta}>
     <AdvisorPhone phone={phone} />
     <Advisor
       title="Faculty Advisor"
@@ -25,8 +25,7 @@ const Meta = ({
       email={studentAdvisorEmail}
       name={studentAdvisor}
     />
-  </dl>
-);
+  </dl>);
 
 Meta.defaultProps = {
   facultyAdvisor: null,

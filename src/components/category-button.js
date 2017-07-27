@@ -4,10 +4,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import styles from 'colby-scss/modules/colby-student-clubs.scss';
+import styles from './colby-student-clubs.module.scss';
 
-const CategoryButton = ({ active, id, name, onClick, slug }) => (
-  <Link to={`/${slug}`}>
+const CategoryButton = ({ active, id, name, onClick, slug }) =>
+  (<Link to={`/${slug}`}>
     <button
       onClick={() => onClick(active === true ? null : id)}
       className={[
@@ -18,8 +18,7 @@ const CategoryButton = ({ active, id, name, onClick, slug }) => (
         .trim()}
       dangerouslySetInnerHTML={{ __html: name }}
     />
-  </Link>
-);
+  </Link>);
 
 CategoryButton.propTypes = {
   active: PropTypes.bool.isRequired,
