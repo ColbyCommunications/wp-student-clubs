@@ -48,7 +48,6 @@ function initCategories(container) {
 }
 
 function init() {
-  console.log('initing');
   Array.prototype.forEach.call(
     document.querySelectorAll('[data-student-clubs]'),
     initCategories
