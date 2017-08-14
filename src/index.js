@@ -3,19 +3,12 @@ import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger';
-import { BrowserRouter, Route } from 'react-router-dom';
 
 import { fetchPage } from './actions';
 import rootReducer from './reducers';
 import AppContainer from './containers/app-container';
 
 const REST_BASE = 'http://www.colby.edu/studentactivities/wp-json/wp/v2/';
-
-let basename = '/communitylife/student-organizations';
-if (window.location.href.indexOf('localhost') !== -1) {
-  basename = `/wp${basename}`;
-}
 
 function renderClubs(container, categories) {
   const initialState = {
@@ -30,10 +23,6 @@ function renderClubs(container, categories) {
 
   const middlewares = [thunkMiddleware];
 
-  if (window.location.href.indexOf('localhost') !== -1) {
-    middlewares.push(createLogger());
-  }
-
   const store = createStore(
     rootReducer,
     initialState,
@@ -46,9 +35,7 @@ function renderClubs(container, categories) {
 
   render(
     <Provider store={store}>
-      <BrowserRouter basename={basename}>
-        <Route component={AppContainer} />
-      </BrowserRouter>
+      <AppContainer />
     </Provider>,
     container
   );
@@ -61,7 +48,11 @@ function initCategories(container) {
 }
 
 function init() {
-  document.querySelectorAll('[data-student-clubs]').forEach(initCategories);
+  console.log('initing');
+  Array.prototype.forEach.call(
+    document.querySelectorAll('[data-student-clubs]'),
+    initCategories
+  );
 }
 
 window.addEventListener('load', init);

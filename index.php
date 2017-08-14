@@ -1,4 +1,9 @@
 <?php
+/**
+ * Plugin Name: Colby Student clubs
+ * Description: A single page app for displaying Colby's student clubs
+ * Author: John Watkins, Colby Communications
+ */
 
 /* Add the rewrite tag for category-name. */
 add_action( 'init', function() {
@@ -47,3 +52,19 @@ function get_term_string() {
 
 	return " data-category={$body[0]->id}";
 }
+
+add_action( 'wp_enqueue_scripts', function() {
+	global $post;
+
+	if ( has_shortcode( $post->post_content, 'student-organizations' ) ) {
+		$dist = plugin_dir_url( __FILE__ ) . '/dist';
+		$min = PROD === true ? '.min' : '';
+
+		wp_enqueue_style( 'student-clubs', "$dist/colby-wp-react-student-clubs$min.css" );
+		wp_enqueue_script(
+			'student-clubs',
+			"$dist/colby-wp-react-student-clubs$min.js",
+			['react', 'react-dom', 'lodash']
+		);
+	}
+} );

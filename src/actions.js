@@ -1,4 +1,4 @@
-import debounce from 'lodash/debounce';
+import _ from 'lodash';
 
 const REST_BASE = 'http://www.colby.edu/studentactivities/wp-json/wp/v2/';
 
@@ -80,7 +80,7 @@ const search = (dispatch, url) =>
     searchCache[url] = posts;
     dispatch(receiveSearchResults(posts));
   });
-const debouncedSearch = debounce(search, 200);
+const debouncedSearch = _.debounce(search, 200);
 export function runSearch(searchTerm) {
   return (dispatch) => {
     dispatch(changeSearchTerm(searchTerm));
