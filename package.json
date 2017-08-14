@@ -1,6 +1,6 @@
 {
   "name": "colby-wp-react-student-clubs",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A React/Redux/WordPress REST API app for displaying Colby student clubs.",
   "main": "src/index.js",
   "scripts": {
@@ -63,7 +63,9 @@
     "sanitize-html": "^1.14.1"
   },
   "eslintConfig": {
-    "extends": ["johnwatkins0"],
+    "extends": [
+      "johnwatkins0"
+    ],
     "rules": {
       "switch-colon-spacing": 0
     }
