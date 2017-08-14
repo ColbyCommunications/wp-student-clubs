@@ -1,6 +1,6 @@
 {
   "name": "colby-wp-react-student-clubs",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A React/Redux/WordPress REST API app for displaying Colby student clubs.",
   "main": "src/index.js",
   "scripts": {
