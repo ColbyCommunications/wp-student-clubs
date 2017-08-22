@@ -570,7 +570,7 @@ function fetchPage(id) {
     dispatch(requestPage());
     dispatch(setActiveCategory(id));
 
-    var url = REST_BASE + 'student-organization?categories=' + id;
+    var url = REST_BASE + 'student-organization?categories=' + id + '&per_page=99';
 
     if (url in fetchPageCache) {
       dispatch(receivePage(fetchPageCache[url]));
@@ -616,7 +616,7 @@ function runSearch(searchTerm) {
   return function (dispatch) {
     dispatch(changeSearchTerm(searchTerm));
 
-    var url = REST_BASE + 'student-organization?search=' + searchTerm;
+    var url = REST_BASE + 'student-organization?search=' + searchTerm + '&per_page=99';
 
     if (url in searchCache) {
       return dispatch(receiveSearchResults(searchCache[url]));
@@ -13148,7 +13148,7 @@ function renderClubs(container, categories) {
 }
 
 var initSingleCategory = function initSingleCategory(container) {
-  fetch(REST_BASE + 'student-organization/?categories=' + container.dataset.categories + '&orderby=title&order=asc&per_page=99&exclude=1&hide_empty=true').then(function (response) {
+  fetch(REST_BASE + 'student-organization/?categories=' + container.dataset.categories + '&orderby=title&order=asc&per_page=99').then(function (response) {
     return response.json();
   }).then(function (items) {
     return (0, _renderSingleCategory2.default)(container, items);

@@ -44,7 +44,7 @@ export function fetchPage(id) {
     dispatch(requestPage());
     dispatch(setActiveCategory(id));
 
-    const url = `${REST_BASE}student-organization?categories=${id}`;
+    const url = `${REST_BASE}student-organization?categories=${id}&per_page=99`;
 
     if (url in fetchPageCache) {
       dispatch(receivePage(fetchPageCache[url]));
@@ -85,7 +85,7 @@ export function runSearch(searchTerm) {
   return (dispatch) => {
     dispatch(changeSearchTerm(searchTerm));
 
-    const url = `${REST_BASE}student-organization?search=${searchTerm}`;
+    const url = `${REST_BASE}student-organization?search=${searchTerm}&per_page=99`;
 
     if (url in searchCache) {
       return dispatch(receiveSearchResults(searchCache[url]));
