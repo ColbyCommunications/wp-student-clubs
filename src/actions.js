@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const REST_BASE = 'http://www.colby.edu/studentactivities/wp-json/wp/v2/';
+const REST_BASE = '//www.colby.edu/studentactivities/wp-json/wp/v2/';
 
 export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
 export function setActiveCategory(id) {

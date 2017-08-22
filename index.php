@@ -36,7 +36,7 @@ function get_term_string() {
 		return '';
 	}
 
-	$url = "http://www.colby.edu/studentactivities/wp-json/wp/v2/categories?slug={$category_name}";
+	$url = "://www.colby.edu/studentactivities/wp-json/wp/v2/categories?slug={$category_name}";
 	$rest_response = get_transient( $url );
 
 	if ( ! $rest_response ) {
