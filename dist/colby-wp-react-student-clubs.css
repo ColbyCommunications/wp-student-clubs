@@ -8,6 +8,47 @@
   margin-right: -0.75rem;
   margin-left: -0.75rem; }
 
+.cardContainer--1_yHu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-right: -0.75rem;
+  margin-left: -0.75rem; }
+  .cardContainer--1_yHu .club--1S8tV {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+    max-width: 100%; }
+    @media screen and (min-width: 768px) {
+      .cardContainer--1_yHu .club--1S8tV {
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+                flex: 0 0 50%;
+        max-width: 50%;
+        -webkit-transform: scale(0.98);
+                transform: scale(0.98); } }
+    @media screen and (min-width: 992px) {
+      .cardContainer--1_yHu .club--1S8tV {
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 33.33333%;
+                flex: 0 0 33.33333%;
+        max-width: 33.33333%;
+        -webkit-transform: scale(0.95);
+                transform: scale(0.95); } }
+    .cardContainer--1_yHu .club--1S8tV .clubInner--3pRbr {
+      border: 1px solid rgba(53, 53, 53, 0.15);
+      padding: 1.5rem;
+      height: 100%;
+      width: 100%;
+      background: transparent; }
+      .cardContainer--1_yHu .club--1S8tV .clubInner--3pRbr p,
+      .cardContainer--1_yHu .club--1S8tV .clubInner--3pRbr dl {
+        font-size: .944rem; }
+    .cardContainer--1_yHu .club--1S8tV:nth-of-type(odd) .clubInner--3pRbr {
+      background: transparent; }
+
 .category-pane--3usnO {
   padding-top: .75rem;
   padding-bottom: .75rem;
@@ -74,11 +115,14 @@
   font-weight: 600;
   font-size: 1.19rem; }
 
-.club--1S8tV {
+.club--1S8tV .clubInner--3pRbr {
   padding: 1.5rem;
+  height: 100%;
+  width: 100%;
   background: rgba(53, 53, 53, 0.045); }
-  .club--1S8tV:nth-of-type(odd) {
-    background: rgba(53, 53, 53, 0.075); }
+
+.club--1S8tV:nth-of-type(odd) .clubInner--3pRbr {
+  background: rgba(53, 53, 53, 0.075); }
 
 .loading-container--1iC3Y {
   display: -webkit-box;
@@ -189,3 +233,5 @@
   border: 1px solid rgba(53, 53, 53, 0.3);
   border-radius: 2px;
   background: white; }
+
+/*# sourceMappingURL=colby-wp-react-student-clubs.css.map*/

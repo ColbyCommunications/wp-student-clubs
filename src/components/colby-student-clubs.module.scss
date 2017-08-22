@@ -9,6 +9,43 @@
   @include make-row;
 }
 
+.cardContainer {
+  @include make-row;
+
+  .club {
+    @include make-col(12);
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      @include make-col(6);
+      transform: scale(.98);
+    }
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+      @include make-col(4);
+      transform: scale(.95);
+    }
+
+    .clubInner {
+      border: 1px solid rgba($black, .15);
+      padding: 1.5rem;
+      height: 100%;
+      width: 100%;
+      background: transparent;
+
+      p,
+      dl {
+        font-size: .944rem;
+      }
+    }
+
+    &:nth-of-type(odd) {
+      .clubInner {
+        background: transparent;
+      }
+    }
+  }
+}
+
 .category-pane {
   padding-top: .75rem;
   padding-bottom: .75rem;
@@ -68,11 +105,17 @@
 }
 
 .club {
-  padding: 1.5rem;
-  background: rgba($black, .045);
+  .clubInner {
+    padding: 1.5rem;
+    height: 100%;
+    width: 100%;
+    background: rgba($black, .045);
+  }
 
   &:nth-of-type(odd) {
-    background: rgba($black, .075);
+    .clubInner {
+      background: rgba($black, .075);
+    }
   }
 }
 

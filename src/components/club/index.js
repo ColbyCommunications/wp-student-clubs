@@ -15,20 +15,23 @@ const Club = ({
   faculty_advisor_email,
   student_advisor,
   student_advisor_email,
+  style,
   website,
 }) =>
-  (<div className={styles.club}>
-    <ClubTitle website={website} title={title} />
-    <ClubDescription description={description} />
-    <ClubMeta
-      /* eslint-disable camelcase */
-      officePhone={office_phone}
-      facultyAdvisor={faculty_advisor}
-      facultyAdvisorEmail={faculty_advisor_email}
-      studentAdvisor={student_advisor}
-      studentAdvisorEmail={student_advisor_email}
-      /* eslint-enable camelcase */
-    />
+  (<div className={`${styles.club} ${style ? styles[style] : ''}`}>
+    <div className={styles.clubInner}>
+      <ClubTitle website={website} title={title} />
+      <ClubDescription description={description} />
+      <ClubMeta
+        /* eslint-disable camelcase */
+        officePhone={office_phone}
+        facultyAdvisor={faculty_advisor}
+        facultyAdvisorEmail={faculty_advisor_email}
+        studentAdvisor={student_advisor}
+        studentAdvisorEmail={student_advisor_email}
+        /* eslint-enable camelcase */
+      />
+    </div>
   </div>);
 
 Club.defaultProps = {
@@ -38,6 +41,7 @@ Club.defaultProps = {
   office_phone: null,
   student_advisor: null,
   student_advisor_email: null,
+  style: '',
   website: null,
 };
 
@@ -50,6 +54,7 @@ Club.propTypes = {
   office_phone: PropTypes.string,
   student_advisor: PropTypes.string,
   student_advisor_email: PropTypes.string,
+  style: PropTypes.string,
   website: PropTypes.string,
 };
 

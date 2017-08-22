@@ -45,7 +45,7 @@ function renderClubs(container, categories) {
 const initSingleCategory = (container) => {
   fetch(
     `${REST_BASE}student-organization/?categories=${container.dataset
-      .categories}&orderby=title&order=asc`
+      .categories}&orderby=title&order=asc&per_page=99&exclude=1&hide_empty=true`
   )
     .then((response) => response.json())
     .then((items) => renderSingleCategory(container, items));
