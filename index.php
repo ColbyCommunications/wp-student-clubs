@@ -42,7 +42,7 @@ add_action( 'wp_enqueue_scripts', function() {
 		wp_enqueue_script(
 			'student-clubs',
 			"$dist/colby-wp-react-student-clubs$min.js",
-			['react', 'react-dom', 'lodash', 'prop-types']
+			['react', 'react-dom', 'lodash', 'prop-types'],
 			$package_json->version,
 			true
 		);

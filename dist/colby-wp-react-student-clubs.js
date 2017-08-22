@@ -570,7 +570,7 @@ function fetchPage(id) {
     dispatch(requestPage());
     dispatch(setActiveCategory(id));
 
-    var url = REST_BASE + 'student-organization?categories=' + id + '&per_page=99';
+    var url = REST_BASE + 'student-organization?categories=' + id + '&per_page=99' + '&orderby=title&order=asc';
 
     if (url in fetchPageCache) {
       dispatch(receivePage(fetchPageCache[url]));
