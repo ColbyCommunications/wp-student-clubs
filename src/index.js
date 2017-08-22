@@ -7,8 +7,9 @@ import { Provider } from 'react-redux';
 import { fetchPage } from './actions';
 import rootReducer from './reducers';
 import AppContainer from './containers/app-container';
+import renderSingleCategory from './renderSingleCategory';
 
-const REST_BASE = 'http://www.colby.edu/studentactivities/wp-json/wp/v2/';
+const REST_BASE = '//www.colby.edu/studentactivities/wp-json/wp/v2/';
 
 function renderClubs(container, categories) {
   const initialState = {
@@ -41,7 +42,21 @@ function renderClubs(container, categories) {
   );
 }
 
-function initCategories(container) {
+const initSingleCategory = (container) => {
+  fetch(
+    `${REST_BASE}student-organization/?categories=${container.dataset
+      .categories}&orderby=title&order=asc`
+  )
+    .then((response) => response.json())
+    .then((items) => renderSingleCategory(container, items));
+};
+
+function initApp(container) {
+  if (container.dataset.categories) {
+    initSingleCategory(container);
+    return;
+  }
+
   fetch(`${REST_BASE}categories?per_page=99&exclude=1&hide_empty=true`)
     .then((response) => response.json())
     .then((categories) => renderClubs(container, categories));
@@ -50,7 +65,7 @@ function initCategories(container) {
 function init() {
   Array.prototype.forEach.call(
     document.querySelectorAll('[data-student-clubs]'),
-    initCategories
+    initApp
   );
 }
 

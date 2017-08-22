@@ -71,6 +71,7 @@ const main = () => {
       'lodash': '_',
     },
     target: 'web',
+    devtool: PROD ? false : 'source-maps',
   };
 };
 
