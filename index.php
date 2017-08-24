@@ -32,13 +32,18 @@ add_action( 'wp_enqueue_scripts', function() {
 	global $post;
 
 	if ( has_shortcode( $post->post_content, 'student-organizations' ) ) {
-		$dist = plugin_dir_url( __FILE__ ) . '/dist';
+		$dist = plugin_dir_url( __FILE__ ) . 'dist';
 		$min = PROD === true ? '.min' : '';
 
-		$package_json = json_decode( file_get_contents( __DIR__ . '/../../package.json' ) )
+		$package_json = json_decode( file_get_contents( __DIR__ . '/package.json' ) )
 			?: (object) [ 'version' => '1.0.1' ];
 
-		wp_enqueue_style( 'student-clubs', "$dist/colby-wp-react-student-clubs$min.css" );
+		wp_enqueue_style(
+			'student-clubs',
+			"$dist/colby-wp-react-student-clubs$min.css",
+			['colby-bootstrap'],
+			$package_json->version
+		);
 		wp_enqueue_script(
 			'student-clubs',
 			"$dist/colby-wp-react-student-clubs$min.js",
