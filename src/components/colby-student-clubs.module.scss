@@ -30,17 +30,19 @@
       padding: 1.5rem;
       height: 100%;
       width: 100%;
-      background: transparent;
+      background: white;
 
       p,
       dl {
         font-size: .944rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
     &:nth-of-type(odd) {
       .clubInner {
-        background: transparent;
+        background: white;
       }
     }
   }

@@ -42,12 +42,14 @@
       padding: 1.5rem;
       height: 100%;
       width: 100%;
-      background: transparent; }
+      background: white; }
       .cardContainer--1_yHu .club--1S8tV .clubInner--3pRbr p,
       .cardContainer--1_yHu .club--1S8tV .clubInner--3pRbr dl {
-        font-size: .944rem; }
+        font-size: .944rem;
+        overflow: hidden;
+        text-overflow: ellipsis; }
     .cardContainer--1_yHu .club--1S8tV:nth-of-type(odd) .clubInner--3pRbr {
-      background: transparent; }
+      background: white; }
 
 .category-pane--3usnO {
   padding-top: .75rem;
