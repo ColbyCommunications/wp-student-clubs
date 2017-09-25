@@ -52,20 +52,14 @@
     "colby-react-search-input": "^1.0.6",
     "colby-scss": "^1.0.14",
     "colby-wp-svg": "^1.0.21",
-    "lodash": "^4.17.4",
     "node-autodeploy-wp": "^1.0.20",
     "prop-types": "^15.5.10",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-redux": "^5.0.5",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "sanitize-html": "^1.14.1"
   },
   "eslintConfig": {
-    "extends": [
-      "johnwatkins0"
-    ],
+    "extends": ["johnwatkins0"],
     "rules": {
       "switch-colon-spacing": 0
     }
