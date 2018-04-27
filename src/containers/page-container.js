@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Page from '../components/page';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   posts: state.search.searchTerm.length ? state.search.posts : state.page.posts,
   fetching: state.page.fetching || state.search.fetching,
   pageOne: state.page.pageOne,

@@ -12,20 +12,13 @@ const Meta = ({
   facultyAdvisorEmail,
   studentAdvisor,
   studentAdvisorEmail,
-}) =>
-  (<dl className={styles.meta}>
+}) => (
+  <dl className={styles.meta}>
     <AdvisorPhone phone={phone} />
-    <Advisor
-      title="Faculty Advisor"
-      email={facultyAdvisorEmail}
-      name={facultyAdvisor}
-    />
-    <Advisor
-      title="Student Advisor"
-      email={studentAdvisorEmail}
-      name={studentAdvisor}
-    />
-  </dl>);
+    <Advisor title="Faculty/Staff Advisor" email={facultyAdvisorEmail} name={facultyAdvisor} />
+    <Advisor title="Student Advisor" email={studentAdvisorEmail} name={studentAdvisor} />
+  </dl>
+);
 
 Meta.defaultProps = {
   facultyAdvisor: null,

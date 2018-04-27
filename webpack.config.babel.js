@@ -1,33 +1,24 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import path from 'path';
-import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import packageJson from './package.json';
 
+const PROD = process.argv.includes('-p');
+const WATCHING = process.argv.includes('--watch') || process.argv.includes('-w');
+
 const main = () => {
-  const PROD = process.argv.includes('-p');
-  const watching = process.argv.includes('--watch');
   const min = PROD ? '.min' : '';
   const entry = './src/index.js';
   const filename = `${packageJson.name}${min}.js`;
   const plugins = [new ExtractTextPlugin(`${packageJson.name}${min}.css`)];
 
-  if (PROD) {
-    plugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        output: {
-          comments: false,
-        },
-      })
-    );
-  }
-
-  if (!watching) {
+  if (!WATCHING) {
     plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'static' }));
   }
 
   return {
+    mode: PROD ? 'production' : 'development',
     entry,
     output: {
       filename,
@@ -41,7 +32,7 @@ const main = () => {
           use: [
             {
               loader: 'babel-loader',
-              options: { presets: ['react', 'es2015', 'stage-1'] },
+              options: { babelrc: true },
             },
           ],
         },
@@ -64,18 +55,8 @@ const main = () => {
         },
       ],
     },
-    externals: {
-      'prop-types': 'PropTypes',
-    },
     target: 'web',
     devtool: PROD ? false : 'source-maps',
-    resolve: {
-      alias: {
-        'react': 'preact-compat',
-        'react-dom': 'preact-compat',
-        'react-redux': 'preact-redux',
-      },
-    },
   };
 };
 

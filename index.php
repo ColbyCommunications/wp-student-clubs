@@ -1,9 +1,16 @@
 <?php
 /**
- * Plugin Name: Colby Student clubs
- * Description: A single page app for displaying Colby's student clubs
+ * Plugin Name: Colby Student Clubs
+ * Description: A single-page display of Colby's student clubs.
  * Author: John Watkins, Colby Communications
+ * 
+ * @package colbycomms/wp-student-clubs
  */
+
+namespace ColbyComms\StudentClubs;
+
+define( __NAMESPACE__ . '\\PROD', true );
+define( __NAMESPACE__ . '\\POST_TYPE', 'student-organization' );
 
 /* Add the rewrite tag for category-name. */
 add_action(
@@ -16,7 +23,7 @@ add_action(
 add_action(
 	'init', function() {
 		add_rewrite_rule(
-			'(student-organizations)/([^/]+)$',
+			'(' . POST_TYPE . ')/([^/]+)$',
 			'index.php?pagename=$matches[1]&category-name=$matches[2]',
 			'top'
 		);
@@ -29,9 +36,13 @@ add_action(
 		add_shortcode(
 			'student-organizations', function( $atts, $content ) {
 				$atts = $atts ?: [];
+				$endpoint = $atts['endpoint'] ?? get_rest_url( '/wp-json/wp/v2/' . POST_TYPE );
+				$categories_endpoint = $atts['categories-endpoint'] ?? get_rest_url( '/wp-json/wp/v2/categories/' );
 				$term_string = ! empty( $atts['categories'] ) ? " data-categories={$atts['categories']}" : '';
+				$endpoint_string = ' data-endpoint="' . esc_url( $endpoint ) . '"'; 
+				$categories_endpoint_string = ' data-categories-endpoint="' . esc_url( $categories_endpoint ) . '"';
 
-				return "<div data-student-clubs{$term_string}>$content</div>";
+				return "<div data-student-clubs{$term_string}{$endpoint_string}{$categories_endpoint_string}>$content</div>";
 			}
 		);
 	}
@@ -52,14 +63,14 @@ add_action(
 
 			wp_enqueue_style(
 				'student-clubs',
-				"$dist/colby-wp-react-student-clubs$min.css",
+				"$dist/wp-student-clubs$min.css",
 				[],
 				$package_json->version
 			);
 			wp_enqueue_script(
 				'student-clubs',
-				"$dist/colby-wp-react-student-clubs$min.js",
-				[ 'prop-types' ],
+				"$dist/wp-student-clubs$min.js",
+				[],
 				$package_json->version,
 				true
 			);

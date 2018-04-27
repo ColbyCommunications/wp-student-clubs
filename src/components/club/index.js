@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -17,8 +18,8 @@ const Club = ({
   student_advisor_email,
   style,
   website,
-}) =>
-  (<div className={`${styles.club} ${style ? styles[style] : ''}`}>
+}) => (
+  <div className={`${styles.club} ${style ? styles[style] : ''}`}>
     <div className={styles.clubInner}>
       <ClubTitle website={website} title={title} />
       <ClubDescription description={description} />
@@ -32,7 +33,8 @@ const Club = ({
         /* eslint-enable camelcase */
       />
     </div>
-  </div>);
+  </div>
+);
 
 Club.defaultProps = {
   description: null,

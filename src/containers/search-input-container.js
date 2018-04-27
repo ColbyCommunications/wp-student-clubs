@@ -3,17 +3,15 @@ import SearchInput from 'colby-react-search-input';
 
 import { runSearch } from '../actions';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   searchTerm: state.search.searchTerm,
   fetching: state.search.fetching,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  handleSearchTermChange: (searchTerm) => dispatch(runSearch(searchTerm)),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  handleSearchTermChange: searchTerm => dispatch(runSearch(ownProps.endpoint, searchTerm)),
 });
 
-const SearchInputContainer = connect(mapStateToProps, mapDispatchToProps)(
-  SearchInput
-);
+const SearchInputContainer = connect(mapStateToProps, mapDispatchToProps)(SearchInput);
 
 export default SearchInputContainer;

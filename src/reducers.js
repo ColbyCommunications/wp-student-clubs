@@ -17,7 +17,7 @@ function categories(
     activeCategory: null,
     savedActiveCategory: null,
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case CHANGE_SEARCH_TERM:
@@ -44,7 +44,7 @@ function page(
     fetching: false,
     posts: [],
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case RESET_PAGE:
@@ -68,7 +68,7 @@ function search(
     posts: [],
     searchTerm: '',
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case REQUEST_PAGE:

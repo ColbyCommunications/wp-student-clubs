@@ -1,16 +1,11 @@
 import { connect } from 'react-redux';
 import App from '../components/colby-student-clubs';
-import { fetchPage } from '../actions';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   activeCategory: state.categories.activeCategory,
   categories: state.categories.categories,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  goBack: (id) => dispatch(fetchPage(id)),
-});
-
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
+const AppContainer = connect(mapStateToProps)(App);
 
 export default AppContainer;

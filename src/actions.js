@@ -1,6 +1,4 @@
-import debounce from 'debounce';
-
-const REST_BASE = '//www.colby.edu/studentactivities/wp-json/wp/v2/';
+import debounce from 'lodash/debounce';
 
 export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
 export function setActiveCategory(id) {
@@ -33,32 +31,27 @@ export function resetPage() {
 }
 
 const fetchPageCache = {};
-export function fetchPage(id) {
-  return (dispatch) => {
-    if (id === null) {
-      dispatch(setActiveCategory(null));
-      dispatch(resetPage());
-      return;
-    }
+export const fetchPage = (endpoint, id) => async (dispatch) => {
+  if (id === null) {
+    dispatch(setActiveCategory(null));
+    dispatch(resetPage());
+    return;
+  }
 
-    dispatch(requestPage());
-    dispatch(setActiveCategory(id));
+  dispatch(requestPage());
+  dispatch(setActiveCategory(id));
 
-    const url =
-      `${REST_BASE}student-organization?categories=${id}&per_page=99` +
-      '&orderby=title&order=asc';
+  const url = `${endpoint}?categories=${id}&per_page=99&orderby=title&order=asc`;
 
-    if (url in fetchPageCache) {
-      dispatch(receivePage(fetchPageCache[url]));
-      return;
-    }
+  if (url in fetchPageCache) {
+    dispatch(receivePage(fetchPageCache[url]));
+    return;
+  }
 
-    fetch(url).then((response) => response.json()).then((posts) => {
-      fetchPageCache[url] = posts;
-      dispatch(receivePage(posts));
-    });
-  };
-}
+  const response = await fetch(url);
+  const posts = await response.json();
+  dispatch(receivePage(posts));
+};
 
 export const CHANGE_SEARCH_TERM = 'CHANGE_SEARCH_TERM';
 export function changeSearchTerm(searchTerm) {
@@ -78,16 +71,18 @@ export function receiveSearchResults(posts) {
 
 const searchCache = {};
 const search = (dispatch, url) =>
-  fetch(url).then((response) => response.json()).then((posts) => {
-    searchCache[url] = posts;
-    dispatch(receiveSearchResults(posts));
-  });
+  fetch(url)
+    .then(response => response.json())
+    .then((posts) => {
+      searchCache[url] = posts;
+      dispatch(receiveSearchResults(posts));
+    });
 const debouncedSearch = debounce(search, 200);
-export function runSearch(searchTerm) {
+export function runSearch(endpoint, searchTerm) {
   return (dispatch) => {
     dispatch(changeSearchTerm(searchTerm));
 
-    const url = `${REST_BASE}student-organization?search=${searchTerm}&per_page=99`;
+    const url = `${endpoint}?search=${searchTerm}&per_page=99`;
 
     if (url in searchCache) {
       return dispatch(receiveSearchResults(searchCache[url]));

@@ -4,7 +4,9 @@ import AnimatedEllipsis from 'colby-react-animated-ellipsis';
 import styles from './colby-student-clubs.module.scss';
 import drawPost from './drawPost';
 
-const Page = ({ posts, fetching, pageOne, searchTerm, activeCategory }) => {
+const Page = ({
+  posts, fetching, pageOne, searchTerm,
+}) => {
   if (fetching === true) {
     return (
       <div className={[styles.page, styles['page--loading']].join(' ').trim()}>
@@ -32,22 +34,16 @@ const Page = ({ posts, fetching, pageOne, searchTerm, activeCategory }) => {
     );
   }
 
-  return (
-    <div className={styles.page}>
-      {posts.map(drawPost)}
-    </div>
-  );
+  return <div className={styles.page}>{posts.map(drawPost)}</div>;
 };
 
 Page.defaultProps = {
-  activeCategory: null,
   pageOne: 'Page One',
   posts: [],
   searchTerm: '',
 };
 
 Page.propTypes = {
-  activeCategory: PropTypes.number,
   fetching: PropTypes.bool.isRequired,
   pageOne: PropTypes.string,
   posts: PropTypes.arrayOf(PropTypes.object),

@@ -6,12 +6,10 @@ const mapStateToProps = (state, ownProps) => ({
   active: state.categories.activeCategory === ownProps.id,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onClick: (id) => dispatch(fetchPage(id)),
+const mapDispatchToProps = dispatch => ({
+  onClick: (endpoint, id) => dispatch(fetchPage(endpoint, id)),
 });
 
-const CategoryButtonContainer = connect(mapStateToProps, mapDispatchToProps)(
-  CategoryButton
-);
+const CategoryButtonContainer = connect(mapStateToProps, mapDispatchToProps)(CategoryButton);
 
 export default CategoryButtonContainer;

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import sanitizeHtml from 'sanitize-html';
 import Club from './club';
 
-const drawPost = ({ meta, id, title, content }) => {
+const drawPost = ({
+  meta, id, title, content,
+}) => {
   const metaProps = {};
 
   if (meta) {

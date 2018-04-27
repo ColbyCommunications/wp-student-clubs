@@ -11,7 +11,7 @@ const Advisor = ({ email, name, title }) => {
       <dt>{title}</dt>
       <dd>
         <a href={`mailto:${email}`}>
-          {name.split(',').map((item) => item.trim()).join(', ')}
+          {name.split(',').map(item => item.trim()).join(', ')}
         </a>
       </dd>
     </div>

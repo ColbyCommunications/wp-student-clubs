@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Categories from '../components/categories';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   categories: state.categories.categories,
 });
 

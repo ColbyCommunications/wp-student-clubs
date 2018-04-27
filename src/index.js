@@ -9,9 +9,7 @@ import rootReducer from './reducers';
 import AppContainer from './containers/app-container';
 import renderSingleCategory from './renderSingleCategory';
 
-const REST_BASE = '//www.colby.edu/studentactivities/wp-json/wp/v2/';
-
-function renderClubs(container, categories) {
+function renderClubs({ container, categories, endpoint }) {
   const initialState = {
     categories: { categories },
     page: { pageOne: container.innerHTML },
@@ -24,49 +22,56 @@ function renderClubs(container, categories) {
 
   const middlewares = [thunkMiddleware];
 
-  const store = createStore(
-    rootReducer,
-    initialState,
-    applyMiddleware(...middlewares)
-  );
+  const store = createStore(rootReducer, initialState, applyMiddleware(...middlewares));
 
   if (activeCategory) {
-    store.dispatch(fetchPage(Number(activeCategory)));
+    store.dispatch(endpoint, fetchPage(Number(activeCategory)));
   }
 
   render(
     <Provider store={store}>
-      <AppContainer />
+      <AppContainer endpoint={endpoint} />
     </Provider>,
-    container
+    container,
   );
 }
 
-const initSingleCategory = (container) => {
-  fetch(
-    `${REST_BASE}student-organization/?categories=${container.dataset
-      .categories}&orderby=title&order=asc&per_page=99`
-  )
-    .then((response) => response.json())
-    .then((items) => renderSingleCategory(container, items));
+const initSingleCategory = async ({ container, categories, endpoint }) => {
+  const response = await fetch(`${endpoint}/?categories=${categories}&orderby=title&order=asc&per_page=99`);
+  const items = await response.json();
+  if (items) {
+    renderSingleCategory(container, items);
+  }
 };
 
-function initApp(container) {
-  if (container.dataset.categories) {
-    initSingleCategory(container);
+const initApp = async (container) => {
+  const endpoint = container.getAttribute('data-endpoint');
+  const categoriesEndpoint = container.getAttribute('data-categories-endpoint');
+  const categories = container.getAttribute('data-categories');
+
+  if (!endpoint) {
     return;
   }
 
-  fetch(`${REST_BASE}categories?per_page=99&exclude=1&hide_empty=true`)
-    .then((response) => response.json())
-    .then((categories) => renderClubs(container, categories));
-}
+  if (categories) {
+    initSingleCategory({ container, categories, endpoint });
+    return;
+  }
 
-function init() {
-  Array.prototype.forEach.call(
-    document.querySelectorAll('[data-student-clubs]'),
-    initApp
-  );
-}
+  if (!categoriesEndpoint) {
+    return;
+  }
+
+  const response = await fetch(`${categoriesEndpoint}?per_page=99&exclude=1&hide_empty=true`);
+  const receivedCategories = await response.json();
+
+  if (receivedCategories) {
+    renderClubs({ container, categories: receivedCategories, endpoint });
+  }
+};
+
+const init = () => {
+  [...document.querySelectorAll('[data-student-clubs]')].forEach(initApp);
+};
 
 window.addEventListener('load', init);

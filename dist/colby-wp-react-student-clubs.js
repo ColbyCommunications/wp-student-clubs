@@ -14317,7 +14317,7 @@ var Meta = function Meta(_ref) {
     { className: _colbyStudentClubsModule2.default.meta },
     _react2.default.createElement(_advisorPhone2.default, { phone: phone }),
     _react2.default.createElement(_advisor2.default, {
-      title: 'Faculty Advisor',
+      title: 'Faculty/Staff Advisor',
       email: facultyAdvisorEmail,
       name: facultyAdvisor
     }),
@@ -14765,4 +14765,4 @@ module.exports = {"ellipsis":"ellipsis--YlpON","blink":"blink--3n9m6"};
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=colby-wp-react-student-clubs.js.map
+//# sourceMappingURL=wp-student-clubs.js.map
