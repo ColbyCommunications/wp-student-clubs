@@ -7,7 +7,7 @@
   @media screen and (min-width: 992px) {
     .container--ZEBSI {
       grid-template-columns: 1fr 3fr; } }
-  .container--ZEBSI .components-text-control__input--3WDcB {
+  .container--ZEBSI input[type="text"] {
     max-width: 100%;
     box-sizing: border-box;
     padding-top: 0.5rem;

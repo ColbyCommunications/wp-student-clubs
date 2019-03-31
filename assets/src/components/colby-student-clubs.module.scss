@@ -15,7 +15,7 @@ $grid-breakpoints: (
 		grid-template-columns: 1fr 3fr;
 	}
 
-	.components-text-control__input {
+	input[type="text"] {
 		max-width: 100%;
 		box-sizing: border-box;
 		padding-top: 0.5rem;
