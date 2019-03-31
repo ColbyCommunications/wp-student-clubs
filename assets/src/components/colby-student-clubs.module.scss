@@ -1,0 +1,115 @@
+$grid-breakpoints: (
+	"md": "768px",
+	"lg": "992px",
+);
+
+.container {
+	display: grid;
+	grid-gap: 1rem;
+
+	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+		grid-template-columns: 1fr 2fr;
+	}
+
+	@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+		grid-template-columns: 1fr 3fr;
+	}
+}
+
+.club {
+
+	.clubInner {
+		padding: 1.5rem;
+		height: 100%;
+		width: 100%;
+		background: rgba(#000, 0.045);
+	}
+
+	&:nth-of-type(odd) {
+
+		.clubInner {
+			background: rgba(#000, 0.075);
+		}
+	}
+}
+
+.cardContainer {
+	display: grid;
+
+	.club {
+
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			transform: scale(0.98);
+		}
+
+		@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+			transform: scale(0.95);
+		}
+
+		.clubInner {
+			border: 1px solid rgba(#000, 0.15);
+			padding: 1.5rem;
+			height: 100%;
+			width: 100%;
+			background: #fff;
+
+			p,
+			dl {
+				font-size: 0.944rem;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+
+		&:nth-of-type(odd) {
+
+			.clubInner {
+				background: #fff;
+			}
+		}
+	}
+}
+
+.categories-title {
+	text-align: center;
+	font-weight: 600;
+	font-size: 1rem;
+}
+
+.page--loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.category {
+	flex-wrap: wrap;
+	margin-bottom: 0.125rem;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+	width: 100%;
+	background-color: rgba(#002878, 0.8);
+	text-transform: uppercase;
+	white-space: normal;
+	font-size: 0.891rem;
+	cursor: pointer;
+	color: #fff;
+	border: none;
+}
+
+.category--active {
+	background-color: #002878;
+}
+
+.club-name {
+	font-weight: 600;
+	font-size: 1.19rem;
+}
+
+.loading-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	font-size: 4rem;
+}
