@@ -1,0 +1,19 @@
+language:
+    - php
+    - node_js
+
+php:
+    - 7.2
+
+node_js:
+    - stable
+
+notifications:
+    slack: colbycommunications:7VDpGw5uHu7tZ7aHDO2puCfG
+
+install:
+    - npm install
+    - composer release
+
+script:
+    - npm test
