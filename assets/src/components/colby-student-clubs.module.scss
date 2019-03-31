@@ -14,6 +14,13 @@ $grid-breakpoints: (
 	@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
 		grid-template-columns: 1fr 3fr;
 	}
+
+	.components-text-control__input {
+		max-width: 100%;
+		box-sizing: border-box;
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+	}
 }
 
 .club {

@@ -16,6 +16,10 @@ import Club from './club';
 import styles from './colby-student-clubs.module.scss';
 
 const Page = ( { activeCategory, content, posts, loading, searchTerm } ) => {
+	if ( ! Array.isArray( posts ) ) {
+		posts = [];
+	}
+
 	if ( loading === true ) {
 		return (
 			<div className={ [ styles.page, styles[ 'page--loading' ] ].join( ' ' ).trim() }>
