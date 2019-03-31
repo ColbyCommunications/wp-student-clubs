@@ -6,6 +6,8 @@ coverage
 
 vendor/*
 !vendor/johnwatkins0/
+!vendor/autoload.php
+!vendor/composer/
 vendor/**/*.xml
 vendor/**/*.json
 vendor/**/*.lock
