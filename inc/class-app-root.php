@@ -60,7 +60,7 @@ class App_Root {
 		global $post;
 
 		if ( is_null( $this->should_render ) ) {
-			if ( ! is_single() ) {
+			if ( ! is_singular( [ 'post', 'page' ] ) ) {
 				$this->should_render = false;
 			} else {
 				$this->should_render = has_shortcode( $post->post_content, self::SHORTCODE )
