@@ -7,6 +7,11 @@
   @media screen and (min-width: 992px) {
     .container--ZEBSI {
       grid-template-columns: 1fr 3fr; } }
+  .container--ZEBSI .components-text-control__input--3WDcB {
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem; }
 
 .club--1KWML .clubInner--2yiQ8 {
   padding: 1.5rem;
