@@ -18,11 +18,12 @@
 		"lint": "eslint assets/src/",
 		"stylelint": "stylelint assets/src/**/*.scss",
 		"jest": "jest",
-		"test": "npm run lint && npm run stylelint && npm run jest && composer run lint && composer run test"
+		"test": "npm run lint && npm run stylelint && npm run jest && composer run lint",
+		"test-local": "npm run lint && npm run stylelint && npm run jest && composer run lint && composer run test"
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "npm test"
+			"pre-commit": "npm run test-local"
 		}
 	},
 	"devDependencies": {
