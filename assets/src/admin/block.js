@@ -6,10 +6,19 @@ import { PanelBody, TextControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, RichText } from '@wordpress/editor';
 
+/**
+ * Registers the student clubs editor block. Fields in the sidebar allow overrides
+ * of the REST endpoint. The content entered through the block's rich text editor
+ * serves as the application home screen; it displays when the user has not chosen a
+ * category and is not searching.
+ */
 registerBlockType( 'colbycomms/wp-student-clubs', {
 	title: __( 'Student Clubs' ),
+
 	icon: 'universal-access-alt',
+
 	category: 'layout',
+
 	attributes: {
 		endpoint: {
 			type: 'string',
@@ -24,6 +33,7 @@ registerBlockType( 'colbycomms/wp-student-clubs', {
 			type: 'string',
 		},
 	},
+
 	edit( { attributes, setAttributes } ) {
 		return [
 			<InspectorControls key="colbycomms/wp-student-clubs-inspector">
@@ -67,7 +77,14 @@ registerBlockType( 'colbycomms/wp-student-clubs', {
 			</div>,
 		];
 	},
+
+	/**
+	 * The block's output is rendered on the backend, so we don't need to create it here,
+	 * though this function is required.
+	 *
+	 * @return {null} Nothing.
+	 */
 	save() {
-		return <RichText.Content />;
+		return null;
 	},
 } );

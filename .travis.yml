@@ -8,10 +8,22 @@ php:
 node_js:
     - stable
 
+services:
+    - docker
+
 notifications:
+    email: false
     slack: colbycommunications:7VDpGw5uHu7tZ7aHDO2puCfG
 
+before_install:
+    - sudo apt-get -y update
+    - sudo apt-get -y install cgroup-bin curl
+    - curl -fsSL -o /tmp/lando-latest.deb http://installer.kalabox.io/lando-latest-dev.deb
+    - sudo dpkg -i /tmp/lando-latest.deb
+    - lando version
+
 install:
+    - lando start -- -v
     - npm install
     - composer release
 
