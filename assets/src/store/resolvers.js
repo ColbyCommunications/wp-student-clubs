@@ -1,4 +1,11 @@
 /**
+ * Redux resolvers. Each resolver runs in place of its same-named selector
+ * when the passed-in function parameters change. When the parameters don't
+ * change, the selector is used. A resolver with no parameters runs only once,
+ * the first time the selector is called.
+ */
+
+/**
  * WordPress dependencies
  */
 import { dispatch } from '@wordpress/data';
@@ -10,6 +17,11 @@ import { addQueryArgs } from '@wordpress/url';
 import { STORE_NAME } from '.';
 import { getRootDataAttribute } from '../get-root-data-attribute';
 
+/**
+ * Fetches posts for the current query and dispatches related actions.
+ *
+ * @param {Object} query Query params.
+ */
 export const getPosts = async ( query ) => {
 	dispatch( STORE_NAME ).setIsLoading( true );
 	const url = addQueryArgs( getRootDataAttribute( 'endpoint' ), query );
@@ -21,6 +33,9 @@ export const getPosts = async ( query ) => {
 	dispatch( STORE_NAME ).setIsLoading( false );
 };
 
+/**
+ * Fetches and dispatches the categories.
+ */
 export const getCategories = async () => {
 	let url;
 	let response;

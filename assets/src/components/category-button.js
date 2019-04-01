@@ -20,6 +20,9 @@ const CategoryButton = ( { active, setActiveCategory, id, name } ) => (
 	/>
 );
 
+/**
+ * Connect the component to the Redux store.
+ */
 export default compose( [
 	withSelect( ( select, { id } ) => ( {
 		active: select( STORE_NAME ).getActiveCategory() === id,

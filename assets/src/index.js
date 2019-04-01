@@ -16,9 +16,13 @@ import SingleCategory from './components/single-category';
  */
 import setUpStore, { STORE_NAME } from './store';
 
+/**
+ * Will contain the root element's data set. Will be set after the root element
+ * is selected.
+ */
 export let ROOT_DATASET;
 
-domReady( () => {
+const start = () => {
 	const root = document.querySelector( '[data-student-clubs-root]' );
 
 	if ( ! root ) {
@@ -29,6 +33,12 @@ domReady( () => {
 	setUpStore();
 
 	dispatch( STORE_NAME ).setContent( root.innerHTML.trim() );
+
+	/**
+	 * If categories have been passed in, we use the SingleCategory component,
+	 * which has a very different look and no interactivity. It simply fetches
+	 * posts in the specified categories and displays them as card components.
+	 */
 	if ( ROOT_DATASET.categories.length ) {
 		dispatch( STORE_NAME ).setCategories( ROOT_DATASET.categories.split( ',' ) );
 
@@ -37,4 +47,6 @@ domReady( () => {
 	}
 
 	render( <ColbyStudentClubs />, root );
-} );
+};
+
+domReady( start );

@@ -152,7 +152,7 @@ class Student_Organization {
 		$screen = get_current_screen();
 
 		if ( self::POST_TYPE === $screen->id ) {
-			wp_enqueue_script( Student_Clubs::BLOCK_ASSET_HANDLE );
+			wp_enqueue_script( Student_Clubs::ADMIN_ASSET_HANDLE );
 			wp_enqueue_style( 'wp-components' );
 		}
 	}

@@ -6,18 +6,7 @@ import styles from '../colby-student-clubs.module.scss';
 import ClubMeta from './meta';
 import ClubTitle from './club-title';
 import ClubDescription from './club-description';
-
-function getMetaField( meta, field ) {
-	if ( field in meta ) {
-		if ( Array.isArray( meta[ field ] ) ) {
-			return meta[ field ][ 0 ];
-		}
-
-		return meta[ field ];
-	}
-
-	return '';
-}
+import { getMetaField } from '../../get-meta-field';
 
 const Club = ( { content, title, meta, style } ) => {
 	return (

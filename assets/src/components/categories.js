@@ -21,4 +21,7 @@ const Categories = ( { categories } ) => (
 	</div>
 );
 
+/**
+ * Connect the component to the Redux store.
+ */
 export default withSelect( ( select ) => ( { categories: select( STORE_NAME ).getCategories() } ) )( Categories );

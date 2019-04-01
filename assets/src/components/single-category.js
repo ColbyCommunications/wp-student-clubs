@@ -18,6 +18,9 @@ const SingleCategory = ( { posts = [] } ) => (
 	</div>
 );
 
+/**
+ * Connect the component to the Redux store.
+ */
 export default withSelect( ( select ) => ( { posts: select( STORE_NAME ).getPosts( select( STORE_NAME ).getQuery() ) } ) )(
 	SingleCategory,
 );

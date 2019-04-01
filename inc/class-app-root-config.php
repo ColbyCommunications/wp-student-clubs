@@ -1,6 +1,8 @@
 <?php
 /**
- * App_Root_Config
+ * Handles validation of the configuration options passed for the display of
+ * the feature on the front end of the site, whether via a shortcode or an
+ * editor block.
  *
  * @package colbycomms/wp-student-clubs
  */
@@ -37,7 +39,7 @@ class App_Root_Config {
 	private $categories_endpoint;
 
 	/**
-	 * Comma separated list of categories to exclude.
+	 * Comma-separated list of categories to include.
 	 *
 	 * @var null|string
 	 */
@@ -56,7 +58,7 @@ class App_Root_Config {
 	}
 
 	/**
-	 * Gets a configuration field.
+	 * Gets a value from one of the whitelisted fields.
 	 *
 	 * @param string $field The field name.
 	 * @return mixed The field value.
