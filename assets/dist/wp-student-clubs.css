@@ -1,17 +1,16 @@
 .container--ZEBSI {
+  margin-top: 1rem;
   display: grid;
   grid-gap: 1rem; }
   @media screen and (min-width: 768px) {
     .container--ZEBSI {
-      grid-template-columns: 1fr 2fr; } }
-  @media screen and (min-width: 992px) {
-    .container--ZEBSI {
-      grid-template-columns: 1fr 3fr; } }
+      grid-template-columns: 200px 2fr; } }
   .container--ZEBSI input[type="text"] {
     max-width: 100%;
     box-sizing: border-box;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem; }
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 0; }
 
 .club--1KWML .clubInner--2yiQ8 {
   padding: 1.5rem;
