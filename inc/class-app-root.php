@@ -106,11 +106,32 @@ class App_Root {
 	}
 
 	/**
-	 * Renders the app root.
+	 * Several values shouldn't be set until the render method actually runs.
 	 *
 	 * @param array  $options Options for the app root.
 	 * @param string $content App root content.
-	 * @return string HTML.
+	 */
+	public function do_render_side_effects( $options, $content ) {
+		self::$rendered = true;
+
+		if ( ! is_array( $options ) ) {
+			$options = [];
+		}
+		$this->config = new App_Root_Config( $options );
+
+		if ( isset( $options['content'] ) ) { // WP 5.0 content is in the options array.
+			$this->content = $options['content'];
+		} else {
+			$this->content = $content; // Pre-5.0 content is everything inside the shortcode.
+		}
+	}
+
+	/**
+	 * Renders the app root. This is the callback for both the shortcode and the editor block.
+	 *
+	 * @param array  $options Options for the app root.
+	 * @param string $content App root content.
+	 * @return string HTML string.
 	 */
 	public function render( $options, $content = '' ) {
 		if ( ! $this->should_render ) {
@@ -121,19 +142,7 @@ class App_Root {
 			return '';
 		}
 
-		self::$rendered = true;
-
-		if ( isset( $options['content'] ) ) { // WP 5.0 content is in the options array.
-			$this->content = $options['content'];
-		} else {
-			$this->content = $content; // Pre-5.0 content is everything inside the shortcode.
-		}
-
-		if ( ! is_array( $options ) ) {
-			$options = [];
-		}
-
-		$this->config = new App_Root_Config( $options );
+		$this->do_render_side_effects( $options, $content );
 
 		$template = sprintf( '%stemplates/app-root.php', PLUGIN_PATH );
 		if ( is_readable( $template ) ) {

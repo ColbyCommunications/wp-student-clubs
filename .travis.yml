@@ -11,6 +11,11 @@ node_js:
 services:
     - docker
 
+addons:
+    apt:
+        packages:
+            - docker-ce
+
 notifications:
     email: false
     slack: colbycommunications:7VDpGw5uHu7tZ7aHDO2puCfG

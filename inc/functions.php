@@ -8,14 +8,15 @@
 namespace Colby_Comms\Student_Clubs;
 
 /**
- * Echoes the data object that will be accessible in JS.
+ * Echoes the data attributes on the app root.
  */
 function the_app_data_attributes() {
 	$attributes = App_Root::get_instance()->get_data_attributes();
-
-	foreach ( $attributes as $key => $value ) {
-		printf( ' data-%s="%s"', esc_attr( $key ), esc_attr( $value ) );
-	}
+	?>
+	data-endpoint="<?php echo esc_attr( $attributes['endpoint'] ); ?>"
+	data-categories-endpoint="<?php echo esc_attr( $attributes['categories-endpoint'] ); ?>"
+	data-categories=<?php echo esc_attr( $attributes['categories'] ); ?>
+		<?php
 }
 
 /**

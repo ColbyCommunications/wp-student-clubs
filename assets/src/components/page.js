@@ -49,6 +49,9 @@ const Page = ( { activeCategory, content, posts, loading, searchTerm } ) => {
 	);
 };
 
+/**
+ * Connect the component to the Redux store.
+ */
 export default withSelect( ( select ) => ( {
 	activeCategory: select( STORE_NAME ).getActiveCategory(),
 	content: select( STORE_NAME ).getContent(),

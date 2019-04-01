@@ -10,6 +10,13 @@ import {
 	SET_CONTENT,
 } from './actions';
 
+/**
+ * Main reducer.
+ *
+ * @param {Object} state App state.
+ * @param {Object} action Redux action.
+ * @return {Object} Reduced state.
+ */
 export default function(
 	state = {
 		activeCategory: null,

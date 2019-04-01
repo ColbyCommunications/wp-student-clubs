@@ -16,39 +16,41 @@ class Student_Clubs {
 	use Singleton;
 
 	const ASSET_HANDLE       = 'wp-student-clubs';
-	const BLOCK_ASSET_HANDLE = 'wp-student-clubs-block';
+	const ADMIN_ASSET_HANDLE = 'wp-student-clubs-block';
 	const BLOCK_TYPE         = 'colbycomms/wp-student-clubs';
 
 	/**
 	 * Everything in the plugin should run after the init hook.
 	 */
 	protected function init() {
-		add_action( 'init', [ $this, 'init_callback' ] );
+		add_action( 'init', [ $this, 'wp_init' ] );
 	}
 
 	/**
-	 * Sets up WP hooks.
+	 * Runs functions on the init hook and adds callbacks for other hooks.
 	 */
-	public function init_callback() {
-		// Callbacks on the init hook.
+	public function wp_init() {
 		$this->register_assets();
 		$this->register_block();
 	}
 
 	/**
-	 * Registers frontend assets for public screens.
+	 * Registers all scripts and styles for the plugin.
 	 */
 	public function register_assets() {
+		$css_file_template = '%sassets/dist/%s.css';
+		$js_file_template  = '%sassets/dist/%s.js';
+
 		wp_register_style(
 			self::ASSET_HANDLE,
-			sprintf( '%sassets/dist/%s.css', PLUGIN_URL, self::ASSET_HANDLE ),
+			sprintf( $css_file_template, PLUGIN_URL, self::ASSET_HANDLE ),
 			[ 'wp-components' ],
-			filemtime( sprintf( '%sassets/dist/%s.css', PLUGIN_PATH, self::ASSET_HANDLE ) )
+			filemtime( sprintf( $css_file_template, PLUGIN_PATH, self::ASSET_HANDLE ) )
 		);
 
 		wp_register_script(
 			self::ASSET_HANDLE,
-			sprintf( '%sassets/dist/%s.js', PLUGIN_URL, self::ASSET_HANDLE ),
+			sprintf( $js_file_template, PLUGIN_URL, self::ASSET_HANDLE ),
 			[
 				'wp-api-fetch',
 				'wp-components',
@@ -59,13 +61,13 @@ class Student_Clubs {
 				'wp-html-entities',
 				'wp-url',
 			],
-			filemtime( sprintf( '%sassets/dist/%s.js', PLUGIN_PATH, self::ASSET_HANDLE ) ),
+			filemtime( sprintf( $js_file_template, PLUGIN_PATH, self::ASSET_HANDLE ) ),
 			true
 		);
 
 		wp_register_script(
-			self::BLOCK_ASSET_HANDLE,
-			sprintf( '%sassets/dist/%s.js', PLUGIN_URL, self::BLOCK_ASSET_HANDLE ),
+			self::ADMIN_ASSET_HANDLE,
+			sprintf( $js_file_template, PLUGIN_URL, self::ADMIN_ASSET_HANDLE ),
 			[
 				'wp-blocks',
 				'wp-components',
@@ -73,7 +75,7 @@ class Student_Clubs {
 				'wp-editor',
 				'wp-i18n',
 			],
-			filemtime( sprintf( '%sassets/dist/%s.js', PLUGIN_PATH, self::BLOCK_ASSET_HANDLE ) ),
+			filemtime( sprintf( $js_file_template, PLUGIN_PATH, self::ADMIN_ASSET_HANDLE ) ),
 			true
 		);
 	}
@@ -82,6 +84,9 @@ class Student_Clubs {
 	 * Registers the editor block.
 	 */
 	public function register_block() {
+		/**
+		 * The register_block_type function is not available pre-5.0.
+		 */
 		if ( ! function_exists( 'register_block_type' ) ) {
 			return;
 		}
@@ -89,7 +94,7 @@ class Student_Clubs {
 		register_block_type(
 			self::BLOCK_TYPE,
 			[
-				'editor_script'   => self::BLOCK_ASSET_HANDLE,
+				'editor_script'   => self::ADMIN_ASSET_HANDLE,
 				'script'          => self::ASSET_HANDLE,
 				'render_callback' => [ App_Root::get_instance(), 'render' ],
 			]

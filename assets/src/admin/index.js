@@ -11,6 +11,14 @@ import { select, dispatch } from '@wordpress/data';
 import './block';
 import MetaBox from './meta-box';
 
+/**
+ * When the new editor is not active, we need to set up the current global post for the core editor Redux
+ * store. This happens automatically with the new editor.
+ *
+ * @param {number} postId Current post ID.
+ * @param {string} restUrl REST URL for the post.
+ * @return {Promise} Promise resolving when completed.
+ */
 const setUpPostInClassicMode = ( postId, restUrl ) =>
 	new Promise( async ( resolve ) => {
 		const response = await global.fetch( `${ restUrl }${ postId }` );

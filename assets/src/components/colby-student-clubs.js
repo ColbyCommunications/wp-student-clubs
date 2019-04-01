@@ -28,6 +28,9 @@ const ColbyStudentClubs = ( { searchTerm, setSearchTerm } ) => (
 	</div>
 );
 
+/**
+ * Connect the component to the Redux store.
+ */
 export default compose( [
 	withSelect( ( select ) => ( { searchTerm: select( STORE_NAME ).getSearchTerm() } ) ),
 	withDispatch( ( dispatch ) => ( { setSearchTerm: dispatch( STORE_NAME ).setSearchTerm } ) ),
