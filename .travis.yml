@@ -1,0 +1,14 @@
+language:
+    - node_js
+
+node_js:
+    - stable
+
+notifications:
+    slack: colbycommunications:7VDpGw5uHu7tZ7aHDO2puCfG
+
+install:
+    - npm install
+
+script:
+    - npm test
