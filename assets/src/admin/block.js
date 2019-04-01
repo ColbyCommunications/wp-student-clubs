@@ -6,6 +6,10 @@ import { PanelBody, TextControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, RichText } from '@wordpress/editor';
 
+/**
+ * Registers the student clubs editor block. Fields in the sidebar allow overrides
+ * of the REST endpoint.
+ */
 registerBlockType( 'colbycomms/wp-student-clubs', {
 	title: __( 'Student Clubs' ),
 	icon: 'universal-access-alt',
@@ -67,7 +71,14 @@ registerBlockType( 'colbycomms/wp-student-clubs', {
 			</div>,
 		];
 	},
+
+	/**
+	 * The block's output is rendered on the backend, so we don't need to create it here,
+	 * though this function is required.
+	 *
+	 * @return {null} Nothing.
+	 */
 	save() {
-		return <RichText.Content />;
+		return null;
 	},
 } );

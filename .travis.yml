@@ -8,6 +8,9 @@ php:
 node_js:
     - stable
 
+services:
+    - docker
+
 notifications:
     slack: colbycommunications:7VDpGw5uHu7tZ7aHDO2puCfG
 
