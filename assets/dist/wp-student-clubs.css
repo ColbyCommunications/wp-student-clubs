@@ -12,14 +12,13 @@
     padding-bottom: 1rem;
     margin-bottom: 0; }
 
-.club--1KWML .clubInner--2yiQ8 {
+.club--1KWML {
   padding: 1.5rem;
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.045); }
-
-.club--1KWML:nth-of-type(odd) .clubInner--2yiQ8 {
-  background: rgba(0, 0, 0, 0.075); }
+  .club--1KWML:nth-of-type(odd) {
+    background: rgba(0, 0, 0, 0.075); }
 
 .cardContainer--3TL6I {
   display: grid;
