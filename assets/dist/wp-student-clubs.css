@@ -22,26 +22,25 @@
   background: rgba(0, 0, 0, 0.075); }
 
 .cardContainer--3TL6I {
-  display: grid; }
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem; }
   @media screen and (min-width: 768px) {
-    .cardContainer--3TL6I .club--1KWML {
-      transform: scale(0.98); } }
+    .cardContainer--3TL6I {
+      grid-template-columns: 1fr 1fr; } }
   @media screen and (min-width: 992px) {
-    .cardContainer--3TL6I .club--1KWML {
-      transform: scale(0.95); } }
-  .cardContainer--3TL6I .club--1KWML .clubInner--2yiQ8 {
+    .cardContainer--3TL6I {
+      grid-template-columns: 1fr 1fr 1fr; } }
+  .cardContainer--3TL6I .club--1KWML {
     border: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 1.5rem;
-    height: 100%;
-    width: 100%;
-    background: #fff; }
-    .cardContainer--3TL6I .club--1KWML .clubInner--2yiQ8 p,
-    .cardContainer--3TL6I .club--1KWML .clubInner--2yiQ8 dl {
+    overflow: hidden;
+    padding: 0.5rem 1rem; }
+    .cardContainer--3TL6I .club--1KWML p,
+    .cardContainer--3TL6I .club--1KWML dl {
       font-size: 0.944rem;
       overflow: hidden;
       text-overflow: ellipsis; }
-  .cardContainer--3TL6I .club--1KWML:nth-of-type(odd) .clubInner--2yiQ8 {
-    background: #fff; }
 
 .categories-title--rf4C0 {
   text-align: center;
